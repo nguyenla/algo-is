@@ -32,10 +32,12 @@ public class Deduplicating_files {
 			for (int i = 0; i < n-1; i++) {
 				boolean isUnique = true;
 				for (int j = i+1; j < n; j++) {
-					if (hash[i] == hash[j]) {
-						collisions++;
-						if (files[i].equals(files[j])) {
+					if (hash[j] == hash[i]) {
+						if (files[j].equals(files[i])) {
 							isUnique = false;
+						}
+						else {
+							collisions++;
 						}
 					}
 				}
@@ -43,6 +45,7 @@ public class Deduplicating_files {
 					unique++;
 				}
 			}
+			unique++; // for the last line
 			System.out.println(unique + " " + collisions);
 			n = s.nextInt();
 			s.nextLine();
