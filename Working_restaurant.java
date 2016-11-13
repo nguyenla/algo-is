@@ -14,6 +14,9 @@ public class Working_restaurant {
 			
 			n = s.nextInt();
 			s.nextLine();
+			if (n!= 0) {
+				System.out.println();
+			}
 		}
 	}
 	
@@ -37,22 +40,32 @@ public class Working_restaurant {
 				take = input.remove();
 				int num = new Integer(take.substring(5));
 				if (stack1 == 0) {
-					res.add("MOVE 2->1 " + stack1);
+					res.add("MOVE 2->1 " + stack2);
 					stack1 += stack2;
 					stack2 = 0;
 					res.add("TAKE 1 " + num);
 					stack1 -= num; // Take num from stack 1
 				}
 				else {
-					if (stack2 < num) {
-						
+					if (stack1 < num) {
+						num -= stack1;
+						res.add("TAKE 1 " + stack1);
+						stack1 = 0;
+						res.add("MOVE 2->1 " + stack2);
+						stack1 += stack2;
+						stack2 = 0;
+						res.add("TAKE 1 " + num);
+						stack1 -= num;
+					}
+					else {
+						res.add("TAKE 1 " + num);
+						stack1 -= num;
 					}
 				}
 			}
 		}
-		
-//		while (i < input.length && input[i].substring(0, 4).equals("DROP")) {
-//			int numPlates = new Integer(input[i].substring(5));
-//		}
+		for (int i = 0; i < res.size(); i++) {
+			System.out.println(res.get(i));
+		}
 	}
 }
